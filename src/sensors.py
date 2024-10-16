@@ -1,0 +1,1 @@
+# Simulación o extracción de datos de sensores
