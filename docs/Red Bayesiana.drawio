@@ -1,0 +1,103 @@
+<mxfile host="app.diagrams.net" agent="Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:131.0) Gecko/20100101 Firefox/131.0" version="24.7.17">
+  <diagram name="Página-1" id="1uCq8CMpiko3tu8o3zYn">
+    <mxGraphModel dx="1434" dy="778" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="FfgKzmRJcJ35rlEatNh2-24" value="" style="endArrow=classic;html=1;rounded=0;entryX=0;entryY=1;entryDx=0;entryDy=0;exitX=0.5;exitY=0;exitDx=0;exitDy=0;" edge="1" parent="1" source="FfgKzmRJcJ35rlEatNh2-36" target="FfgKzmRJcJ35rlEatNh2-42">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="-83" y="695" as="sourcePoint" />
+            <mxPoint x="137" y="890" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="FfgKzmRJcJ35rlEatNh2-25" value="" style="endArrow=classic;html=1;rounded=0;entryX=1;entryY=0;entryDx=0;entryDy=0;exitX=0;exitY=1;exitDx=0;exitDy=0;" edge="1" parent="1" source="FfgKzmRJcJ35rlEatNh2-35" target="FfgKzmRJcJ35rlEatNh2-29">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="548.7" y="741.3" as="sourcePoint" />
+            <mxPoint x="370" y="900" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="FfgKzmRJcJ35rlEatNh2-29" value="Velocidad del ventilador" style="ellipse;whiteSpace=wrap;html=1;aspect=fixed;" vertex="1" parent="1">
+          <mxGeometry x="560" y="420" width="80" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="FfgKzmRJcJ35rlEatNh2-34" value="Voltaje" style="ellipse;whiteSpace=wrap;html=1;aspect=fixed;" vertex="1" parent="1">
+          <mxGeometry x="450" y="520" width="80" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="FfgKzmRJcJ35rlEatNh2-35" value="Presión del refrigerante" style="ellipse;whiteSpace=wrap;html=1;aspect=fixed;" vertex="1" parent="1">
+          <mxGeometry x="670" y="300" width="80" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="FfgKzmRJcJ35rlEatNh2-36" value="Estado del sensor" style="ellipse;whiteSpace=wrap;html=1;aspect=fixed;" vertex="1" parent="1">
+          <mxGeometry x="37" y="620" width="80" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="FfgKzmRJcJ35rlEatNh2-38" value="Cierre de la puerta" style="ellipse;whiteSpace=wrap;html=1;aspect=fixed;" vertex="1" parent="1">
+          <mxGeometry x="250" y="360" width="80" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="FfgKzmRJcJ35rlEatNh2-39" value="Estado del compresor" style="ellipse;whiteSpace=wrap;html=1;aspect=fixed;" vertex="1" parent="1">
+          <mxGeometry x="430" y="300" width="80" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="FfgKzmRJcJ35rlEatNh2-40" value="Suciedad" style="ellipse;whiteSpace=wrap;html=1;aspect=fixed;" vertex="1" parent="1">
+          <mxGeometry x="670" y="520" width="80" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="FfgKzmRJcJ35rlEatNh2-42" value="Temperatura interna" style="ellipse;whiteSpace=wrap;html=1;aspect=fixed;" vertex="1" parent="1">
+          <mxGeometry x="217" y="300" width="80" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="FfgKzmRJcJ35rlEatNh2-43" value="Diagnóstico" style="ellipse;whiteSpace=wrap;html=1;aspect=fixed;" vertex="1" parent="1">
+          <mxGeometry x="387" y="80" width="80" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="FfgKzmRJcJ35rlEatNh2-46" value="" style="endArrow=classic;html=1;rounded=0;entryX=0;entryY=1;entryDx=0;entryDy=0;exitX=1;exitY=0;exitDx=0;exitDy=0;" edge="1" parent="1" source="FfgKzmRJcJ35rlEatNh2-42" target="FfgKzmRJcJ35rlEatNh2-43">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="327" y="470" as="sourcePoint" />
+            <mxPoint x="467" y="190" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="FfgKzmRJcJ35rlEatNh2-47" value="" style="endArrow=classic;html=1;rounded=0;exitX=0;exitY=0.5;exitDx=0;exitDy=0;entryX=1;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="1" source="FfgKzmRJcJ35rlEatNh2-39" target="FfgKzmRJcJ35rlEatNh2-42">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="310" y="510" as="sourcePoint" />
+            <mxPoint x="360" y="460" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="FfgKzmRJcJ35rlEatNh2-48" value="" style="endArrow=classic;html=1;rounded=0;exitX=0.5;exitY=0;exitDx=0;exitDy=0;entryX=0.625;entryY=0.988;entryDx=0;entryDy=0;entryPerimeter=0;" edge="1" parent="1" source="FfgKzmRJcJ35rlEatNh2-39" target="FfgKzmRJcJ35rlEatNh2-43">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="310" y="450" as="sourcePoint" />
+            <mxPoint x="360" y="400" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="FfgKzmRJcJ35rlEatNh2-49" value="" style="endArrow=classic;html=1;rounded=0;exitX=0;exitY=0.5;exitDx=0;exitDy=0;entryX=1;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="1" source="FfgKzmRJcJ35rlEatNh2-35" target="FfgKzmRJcJ35rlEatNh2-39">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="663" y="339.5" as="sourcePoint" />
+            <mxPoint x="530" y="339.5" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="FfgKzmRJcJ35rlEatNh2-50" value="" style="endArrow=classic;html=1;rounded=0;exitX=0;exitY=0;exitDx=0;exitDy=0;entryX=1;entryY=1;entryDx=0;entryDy=0;" edge="1" parent="1" source="FfgKzmRJcJ35rlEatNh2-35" target="FfgKzmRJcJ35rlEatNh2-43">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="450" y="360" as="sourcePoint" />
+            <mxPoint x="317" y="360" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="FfgKzmRJcJ35rlEatNh2-51" value="" style="endArrow=classic;html=1;rounded=0;exitX=0.5;exitY=0;exitDx=0;exitDy=0;entryX=0.775;entryY=0.963;entryDx=0;entryDy=0;entryPerimeter=0;" edge="1" parent="1" source="FfgKzmRJcJ35rlEatNh2-29" target="FfgKzmRJcJ35rlEatNh2-43">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="480" y="310" as="sourcePoint" />
+            <mxPoint x="447" y="169" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="FfgKzmRJcJ35rlEatNh2-52" value="" style="endArrow=classic;html=1;rounded=0;exitX=1;exitY=0;exitDx=0;exitDy=0;entryX=0;entryY=1;entryDx=0;entryDy=0;" edge="1" parent="1" source="FfgKzmRJcJ35rlEatNh2-34" target="FfgKzmRJcJ35rlEatNh2-29">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="310" y="510" as="sourcePoint" />
+            <mxPoint x="360" y="460" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="FfgKzmRJcJ35rlEatNh2-53" value="" style="endArrow=classic;html=1;rounded=0;exitX=0.5;exitY=0;exitDx=0;exitDy=0;entryX=0.5;entryY=1;entryDx=0;entryDy=0;" edge="1" parent="1" source="FfgKzmRJcJ35rlEatNh2-34" target="FfgKzmRJcJ35rlEatNh2-39">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="528" y="542" as="sourcePoint" />
+            <mxPoint x="582" y="498" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="FfgKzmRJcJ35rlEatNh2-54" value="" style="endArrow=classic;html=1;rounded=0;exitX=0;exitY=0;exitDx=0;exitDy=0;entryX=1;entryY=1;entryDx=0;entryDy=0;" edge="1" parent="1" source="FfgKzmRJcJ35rlEatNh2-40" target="FfgKzmRJcJ35rlEatNh2-29">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="528" y="542" as="sourcePoint" />
+            <mxPoint x="582" y="498" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>
