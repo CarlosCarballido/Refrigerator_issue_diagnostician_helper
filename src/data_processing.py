@@ -13,6 +13,12 @@ def load_data(file_path):
         print(f"El archivo {file_path} no fue encontrado.")
         return None
 
+def get_error_frequencies(df):
+    """
+    Obtiene las frecuencias de errores desde el CSV.
+    """
+    return df['Error Frequency'].values
+
 def diagnose_issue(symptom, df):
     """
     Busca posibles problemas basados en los síntomas observados.
