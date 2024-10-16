@@ -1,16 +1,16 @@
 Error ID,Error Code,Error Description,Symptoms,Possible Causes,Solutions,Difficulty Level,Requires Technician,Estimated Repair Time (hours),Estimated Cost (USD),Error Frequency
-1,E1,The refrigerator is not cooling.,"High internal temperature, food is not preserved.","Compressor failure, faulty thermostat.",Check the compressor and replace the thermostat.,3,Yes,3,150,89
-2,E2,Ice buildup in the freezer.,Excess ice on the walls of the freezer.,Issue with the fan or automatic defrost.,Clean the fan and check the defrost system.,2,No,2,50,82
-3,E3,The interior light is not turning on.,Refrigerator interior is dark when the door is opened.,Faulty light bulb or door switch.,Replace the bulb or adjust the switch.,1,No,1,10,38
-4,E4,Unusual compressor noises.,Loud noises or vibrations.,Compressor wear or misalignment vibration.,Adjust the compressor or replace faulty components.,4,Yes,4,200,26
-5,E5,Water leaks at the base of the refrigerator.,Water on the floor near the refrigerator.,Blocked drain or overflowing drip tray.,Unclog the drain and clean the drip tray.,2,No,2,30,78
-6,E6,The refrigerator door does not close properly.,"Door stays slightly open, affecting temperature maintenance.",Damaged door gasket or misalignment.,Replace the door gasket or realign the door.,2,No,1,30,73
-7,E7,Water dispenser not working.,No water coming out of the dispenser.,Clogged water filter or frozen water line.,Check and replace the water filter or thaw the water line.,3,No,2,60,10
-8,E8,Ice maker not producing ice.,No ice is formed even when the ice maker is on.,Faulty ice maker module or clogged water line.,Replace the ice maker module or unclog the water line.,4,Yes,3,120,21
-9,E9,Temperature fluctuations inside the fridge.,"Temperature is not stable, leading to spoiled food.",Faulty thermostat or temperature sensor.,Replace the thermostat or check the sensor connections.,3,Yes,2,100,81
-10,E10,Refrigerator runs continuously without stopping.,"Refrigerator runs non-stop, consuming more energy.",Faulty thermostat or damaged defrost timer.,Replace the thermostat or defrost timer.,5,Yes,5,250,70
-11,E11,Refrigerator door not sealing properly.,"Warm air entering the fridge, reduced cooling efficiency.",Worn or misaligned door seal.,Replace or realign the door seal.,2,No,1,40,80
-12,E12,Water dispenser not working.,No water dispensing even when activated.,Clogged water filter or frozen water line.,Replace the water filter or thaw the frozen water line.,3,No,2,60,48
-13,E13,Ice maker not producing ice.,"No ice is formed, or ice maker is not filling with water.",Faulty ice maker module or blocked water supply.,Replace the ice maker module or clear the water supply line.,4,Yes,3,120,65
-14,E14,Temperature fluctuations in the fridge.,Inconsistent temperatures leading to spoiled food.,Malfunctioning thermostat or sensor issues.,Replace the thermostat or recalibrate the sensor.,3,Yes,2,100,83
+1,E1,The refrigerator is not cooling.,"High internal temperature, food is not preserved.","Compressor failure, faulty thermostat.",Check the compressor and replace the thermostat.,3,Yes,3,150,0.89
+2,E2,Ice buildup in the freezer.,Excess ice on the walls of the freezer.,Issue with the fan or automatic defrost.,Clean the fan and check the defrost system.,2,No,2,50,0.82
+3,E3,The interior light is not turning on.,Refrigerator interior is dark when the door is opened.,Faulty light bulb or door switch.,Replace the bulb or adjust the switch.,1,No,1,10,0.38
+4,E4,Unusual compressor noises.,Loud noises or vibrations.,Compressor wear or misalignment vibration.,Adjust the compressor or replace faulty components.,4,Yes,4,200,0.26
+5,E5,Water leaks at the base of the refrigerator.,Water on the floor near the refrigerator.,Blocked drain or overflowing drip tray.,Unclog the drain and clean the drip tray.,2,No,2,30,0.78
+6,E6,The refrigerator door does not close properly.,"Door stays slightly open, affecting temperature maintenance.",Damaged door gasket or misalignment.,Replace the door gasket or realign the door.,2,No,1,30,0.73
+7,E7,Water dispenser not working.,No water coming out of the dispenser.,Clogged water filter or frozen water line.,Check and replace the water filter or thaw the water line.,3,No,2,60,0.10
+8,E8,Ice maker not producing ice.,No ice is formed even when the ice maker is on.,Faulty ice maker module or clogged water line.,Replace the ice maker module or unclog the water line.,4,Yes,3,120,0.21
+9,E9,Temperature fluctuations inside the fridge.,"Temperature is not stable, leading to spoiled food.",Faulty thermostat or temperature sensor.,Replace the thermostat or check the sensor connections.,3,Yes,2,100,0.81
+10,E10,Refrigerator runs continuously without stopping.,"Refrigerator runs non-stop, consuming more energy.",Faulty thermostat or damaged defrost timer.,Replace the thermostat or defrost timer.,5,Yes,5,250,0.70
+11,E11,Refrigerator door not sealing properly.,"Warm air entering the fridge, reduced cooling efficiency.",Worn or misaligned door seal.,Replace or realign the door seal.,2,No,1,40,0.80
+12,E12,Water dispenser not working.,No water dispensing even when activated.,Clogged water filter or frozen water line.,Replace the water filter or thaw the frozen water line.,3,No,2,60,0.48
+13,E13,Ice maker not producing ice.,"No ice is formed, or ice maker is not filling with water.",Faulty ice maker module or blocked water supply.,Replace the ice maker module or clear the water supply line.,4,Yes,3,120,0.65
+14,E14,Temperature fluctuations in the fridge.,Inconsistent temperatures leading to spoiled food.,Malfunctioning thermostat or sensor issues.,Replace the thermostat or recalibrate the sensor.,3,Yes,2,100,0.83
 15,E15,Refrigerator constantly running.,"Refrigerator never stops running, high energy usage.",Faulty defrost timer or malfunctioning compressor.,Replace the defrost timer or service the compressor.,5,Yes,4,250,100
