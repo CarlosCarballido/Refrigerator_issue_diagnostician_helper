@@ -1,0 +1,3 @@
+# Proyecto de Diagnóstico de Neveras
+
+Descripción del proyecto...

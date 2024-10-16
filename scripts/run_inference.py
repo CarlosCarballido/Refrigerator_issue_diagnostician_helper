@@ -1,0 +1,1 @@
+# Script para correr el sistema de diagnóstico
