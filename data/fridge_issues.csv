@@ -1,6 +1,6 @@
 Error ID,Error Code,Error Description,Symptoms,Possible Causes,Solutions,Difficulty Level,Requires Technician,Estimated Repair Time (hours),Estimated Cost (USD),Error Frequency
-1,E1,The refrigerator is not cooling.,"High internal temperature, food is not preserved.","Compressor failure, faulty thermostat.",Check the compressor and replace the thermostat.,3,Yes,3,150,0.89
-2,E2,The interior light is not turning on.,Refrigerator interior is dark when the door is opened.,Faulty light bulb or door switch.,Replace the bulb or adjust the switch.,1,No,1,10,0.38
+1,E1,The refrigerator is not cooling.,"High internal temperature, food is not preserved.","Compressor failure, faulty thermostat.",Check the compressor and replace the thermostat.,3,Yes,3,150,0.85
+2,E2,The interior light is not turning on.,Refrigerator interior is dark when the door is opened.,Faulty light bulb or door switch.,Replace the bulb or adjust the switch.,1,No,1,10,0.6
 3,E3,Unusual compressor noises.,Loud noises or vibrations.,Compressor wear or misalignment vibration.,Adjust the compressor or replace faulty components.,4,Yes,4,200,0.26
 4,E4,The refrigerator door does not close properly.,"Door stays slightly open, affecting temperature maintenance.",Damaged door gasket or misalignment.,Replace the door gasket or realign the door.,2,No,1,30,0.73
 5,E5,Temperature fluctuations inside the fridge.,"Temperature is not stable, leading to spoiled food.",Faulty thermostat or temperature sensor.,Replace the thermostat or check the sensor connections.,3,Yes,2,100,0.81
