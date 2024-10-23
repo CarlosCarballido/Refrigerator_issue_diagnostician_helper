@@ -12,5 +12,3 @@ Error ID,Error Code,Error Description,Symptoms,Possible Causes,Solutions,Difficu
 11,E11,Refrigerator door not sealing properly.,"Warm air entering the fridge, reduced cooling efficiency.",Worn or misaligned door seal.,Replace or realign the door seal.,2,No,1,40,0.80
 12,E12,Water dispenser not working.,No water dispensing even when activated.,Clogged water filter or frozen water line.,Replace the water filter or thaw the frozen water line.,3,No,2,60,0.48
 13,E13,Ice maker not producing ice.,"No ice is formed, or ice maker is not filling with water.",Faulty ice maker module or blocked water supply.,Replace the ice maker module or clear the water supply line.,4,Yes,3,120,0.65
-14,E14,Temperature fluctuations in the fridge.,Inconsistent temperatures leading to spoiled food.,Malfunctioning thermostat or sensor issues.,Replace the thermostat or recalibrate the sensor.,3,Yes,2,100,0.83
-15,E15,Refrigerator constantly running.,"Refrigerator never stops running, high energy usage.",Faulty defrost timer or malfunctioning compressor.,Replace the defrost timer or service the compressor.,5,Yes,4,250,100
