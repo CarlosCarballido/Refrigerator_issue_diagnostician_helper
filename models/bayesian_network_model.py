@@ -1,44 +1,93 @@
 from pgmpy.models import BayesianNetwork
 from pgmpy.factors.discrete import TabularCPD
+from pgmpy.inference import VariableElimination
 
-def create_bayesian_model():
-    """
-    Crea y devuelve el modelo bayesiano para diagnosticar fallos en neveras.
-    """
-    model = BayesianNetwork([('Internal_temperature', 'Compressor_status'),
-                             ('Voltage', 'Compressor_status'),
-                             ('Pressure', 'Compressor_status'),
-                             ('Fan_speed', 'Compressor_status'),
-                             ('Sensor_status', 'Compressor_status'),
-                             ('Door_well_closed', 'Compressor_status'),
-                             ('Has_dirt', 'Compressor_status')])
-    
-    cpd_internal_temp = TabularCPD(variable='Internal_temperature', variable_card=3, 
-                                   values=[[0.2],  # Baja temperatura
-                                           [0.5],  # Temperatura normal
-                                           [0.3]]) # Alta temperatura
+# Definición del modelo
+model = BayesianNetwork([
+    ('Incorrect Internal Temperature', 'Refrigerator Doesn\'t Cool'),
+    ('Incorrect Internal Temperature', 'Refrigerator Fills with Frost'),
+    ('Incorrect Voltage', 'Light Not Turning On'),
+    ('Incorrect Voltage', 'Refrigerator Doesn\'t Stop'),
+    ('Incorrect Coolant Pressure', 'Incorrect Voltage'),
+    ('Compressor Failure', 'Refrigerator Doesn\'t Stop'),
+    ('Door Doesn\'t Lock', 'Incorrect Internal Temperature'),
+    ('Dirt', 'Incorrect Internal Temperature'),
+    ('Incorrect Fan Speed', 'Incorrect Internal Temperature'),
+    ('Incorrect Coolant Pressure', 'Incorrect Internal Temperature')
+])
 
-    cpd_voltage = TabularCPD(variable='Voltage', variable_card=3, 
-                             values=[[0.15],  # Bajo voltaje
-                                     [0.7],   # Voltaje normal
-                                     [0.15]]) # Alto voltaje
+# CPDs
+cpd_refrigerator_doesnt_cool = TabularCPD(
+    variable='Refrigerator Doesn\'t Cool', variable_card=2,
+    values=[
+        [0.9, 0.85, 0.8, 0.75, 0.8, 0.75, 0.7, 0.6, 0.6, 0.5, 0.4, 0.3, 0.5, 0.4, 0.2, 0.1],
+        [0.1, 0.15, 0.2, 0.25, 0.2, 0.25, 0.3, 0.4, 0.4, 0.5, 0.6, 0.7, 0.5, 0.6, 0.8, 0.9]
+    ],
+    evidence=['Incorrect Internal Temperature', 'Door Doesn\'t Lock', 'Dirt', 'Incorrect Fan Speed'],
+    evidence_card=[2, 2, 2, 2]
+)
 
-    cpd_pressure = TabularCPD(variable='Pressure', variable_card=3, 
-                              values=[[0.25],  # Baja presión
-                                      [0.5],   # Presión normal
-                                      [0.25]]) # Alta presión
+cpd_refrigerator_fills_with_frost = TabularCPD(
+    variable='Refrigerator Fills with Frost', variable_card=2,
+    values=[
+        [0.9, 0.85, 0.8, 0.75, 0.8, 0.75, 0.7, 0.6, 0.6, 0.5, 0.4, 0.3, 0.5, 0.4, 0.3, 0.2],
+        [0.1, 0.15, 0.2, 0.25, 0.2, 0.25, 0.3, 0.4, 0.4, 0.5, 0.6, 0.7, 0.5, 0.6, 0.7, 0.8]
+    ],
+    evidence=['Incorrect Internal Temperature', 'Door Doesn\'t Lock', 'Dirt', 'Incorrect Fan Speed'],
+    evidence_card=[2, 2, 2, 2]
+)
 
-    cpd_fan_speed = TabularCPD(variable='Fan_speed', variable_card=3, 
-                               values=[[0.3],   # Velocidad baja
-                                       [0.5],   # Velocidad normal
-                                       [0.2]])  # Velocidad alta
+cpd_light_not_turning_on = TabularCPD(
+    variable='Light Not Turning On', variable_card=2,
+    values=[
+        [0.7, 0.6, 0.4, 0.1],
+        [0.3, 0.4, 0.6, 0.9]
+    ],
+    evidence=['Incorrect Voltage', 'Incorrect Coolant Pressure'],
+    evidence_card=[2, 2]
+)
 
-    cpd_sensor_status = TabularCPD(variable='Sensor_status', variable_card=2, 
-                                   values=[[0.95], [0.05]])
-    cpd_door_closed = TabularCPD(variable='Door_well_closed', variable_card=2, 
-                                 values=[[0.95], [0.05]])
-    cpd_has_dirt = TabularCPD(variable='Has_dirt', variable_card=2, 
-                              values=[[0.7], [0.3]])
-    
-    model.add_cpds(cpd_internal_temp, cpd_voltage, cpd_pressure, cpd_fan_speed, cpd_sensor_status, cpd_door_closed, cpd_has_dirt)
-    
+cpd_refrigerator_doesnt_stop = TabularCPD(
+    variable='Refrigerator Doesn\'t Stop', variable_card=2,
+    values=[
+        [0.75, 0.6, 0.55, 0.5, 0.65, 0.6, 0.2, 0.1],
+        [0.25, 0.4, 0.45, 0.5, 0.35, 0.4, 0.8, 0.9]
+    ],
+    evidence=['Incorrect Voltage', 'Compressor Failure', 'Incorrect Coolant Pressure'],
+    evidence_card=[2, 2, 2]
+)
+
+cpd_incorrect_internal_temperature = TabularCPD(
+    variable='Incorrect Internal Temperature', variable_card=2,
+    values=[
+        [0.95, 0.9, 0.85, 0.8, 0.85, 0.8, 0.75, 0.7, 0.8, 0.75, 0.7, 0.5, 0.7, 0.6, 0.5, 0.3, 0.8, 0.7, 0.6, 0.4, 0.6, 0.5, 0.4, 0.2, 0.5, 0.4, 0.3, 0.1, 0.3, 0.2, 0.1, 0.05],
+        [0.05, 0.1, 0.15, 0.2, 0.15, 0.2, 0.25, 0.3, 0.2, 0.25, 0.3, 0.5, 0.3, 0.4, 0.5, 0.7, 0.2, 0.3, 0.4, 0.6, 0.4, 0.5, 0.6, 0.8, 0.5, 0.6, 0.7, 0.9, 0.7, 0.8, 0.9, 0.95]
+    ],
+    evidence=['Door Doesn\'t Lock', 'Dirt', 'Incorrect Fan Speed', 'Incorrect Coolant Pressure', 'Compressor Failure'],
+    evidence_card=[2, 2, 2, 2, 2]
+)
+
+cpd_incorrect_voltage = TabularCPD(
+    variable='Incorrect Voltage', variable_card=2,
+    values=[
+        [0.7, 0.2],
+        [0.3, 0.8]
+    ],
+    evidence=['Incorrect Coolant Pressure'],
+    evidence_card=[2]
+)
+
+# Añadir los CPDs al modelo
+model.add_cpds(
+    cpd_refrigerator_doesnt_cool,
+    cpd_refrigerator_fills_with_frost,
+    cpd_light_not_turning_on,
+    cpd_refrigerator_doesnt_stop,
+    cpd_incorrect_internal_temperature,
+    cpd_incorrect_voltage
+)
+
+if __name__ == '__main__':
+    print(model.check_model())
+    print(model.get_cpds())
+    print(model.get_independencies())
