@@ -46,6 +46,7 @@
 | False                          | False             | True | False               | 0.4                                  | 0.6                                   |
 | False                          | False             | False| True                | 0.3                                  | 0.7                                   |
 | False                          | False             | False| False               | 0.2                                  | 0.8                                   |
+
 ---
 
 ## Nodo 3: `Light Not Turning On`
@@ -58,7 +59,6 @@
 | False             | False                      | 0.1                         | 0.9                          |
 
 ---
-
 
 ## Nodo 4: `Refrigerator Doesn't Stop`
 
@@ -114,13 +114,13 @@
 
 ---
 
-
 ## Nodo 6: `Incorrect Voltage`
 
 | Incorrect Coolant Pressure | Incorrect Voltage = True | Incorrect Voltage = False |
 |----------------------------|--------------------------|---------------------------|
 | True                       | 0.7                      | 0.3                       |
 | False                      | 0.2                      | 0.8                       |
+
 ---
 
 ## 7. Nodo: `Door Doesn't Lock`
