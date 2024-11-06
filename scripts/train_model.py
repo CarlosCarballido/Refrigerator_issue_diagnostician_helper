@@ -5,7 +5,6 @@ from pgmpy.models import BayesianNetwork
 from pgmpy.factors.discrete import TabularCPD
 from pgmpy.estimators import MaximumLikelihoodEstimator, BayesianEstimator
 
-# Definición del modelo
 model = BayesianNetwork([
     ("Incorrect Internal Temperature", "Refrigerator Doesn't Cool"),
     ("Incorrect Internal Temperature", "Refrigerator Fills with Frost"),
@@ -19,7 +18,6 @@ model = BayesianNetwork([
     ("Incorrect Coolant Pressure", "Incorrect Internal Temperature")
 ])
 
-# Ejemplo de datos observados
 data = pd.DataFrame({
     "Incorrect Internal Temperature": [0, 1, 0, 1, 1],
     "Refrigerator Doesn't Cool": [1, 1, 0, 1, 0],
@@ -34,18 +32,16 @@ data = pd.DataFrame({
     "Incorrect Fan Speed": [1, 0, 1, 0, 1]
 })
 
-# Entrenamiento del modelo con MaximumLikelihoodEstimator
+# Model train with MaximumLikelihoodEstimator
 model.fit(data, estimator=MaximumLikelihoodEstimator)
 
-# Visualización de los CPDs entrenados
 print("CPDs ajustados con MaximumLikelihoodEstimator:")
 for cpd in model.get_cpds():
     print(cpd)
 
-# (Opcional) Entrenamiento del modelo con BayesianEstimator y pseudocontadores (equivalent_sample_size=5)
+# Model train with BayesianEstimator
 model.fit(data, estimator=BayesianEstimator, prior_type="BDeu", equivalent_sample_size=5)
 
-# Visualización de los CPDs entrenados con BayesianEstimator
 print("\nCPDs ajustados con BayesianEstimator:")
 
 for cpd in model.get_cpds():

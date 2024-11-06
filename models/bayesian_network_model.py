@@ -2,7 +2,6 @@ from pgmpy.models import BayesianNetwork
 from pgmpy.factors.discrete import TabularCPD
 from pgmpy.inference import VariableElimination
 
-# Definición del modelo
 model = BayesianNetwork([
     ('Incorrect Internal Temperature', 'Refrigerator Doesn\'t Cool'),
     ('Incorrect Internal Temperature', 'Refrigerator Fills with Frost'),
@@ -77,7 +76,7 @@ cpd_incorrect_voltage = TabularCPD(
     evidence_card=[2]
 )
 
-# Añadir los CPDs al modelo
+# Add CPSs to the model
 model.add_cpds(
     cpd_refrigerator_doesnt_cool,
     cpd_refrigerator_fills_with_frost,
