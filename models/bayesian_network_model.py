@@ -5,6 +5,13 @@ from pgmpy.inference import VariableElimination
 model = BayesianNetwork([
     ('Incorrect Internal Temperature', 'Refrigerator Doesn\'t Cool'),
     ('Incorrect Internal Temperature', 'Refrigerator Fills with Frost'),
+    ('Incorrect Voltage', 'Refrigerator Doesn\'t Cool'),
+    ('Incorrect Coolant Pressure', 'Refrigerator Doesn\'t Cool'),
+    ('Compressor Failure', 'Refrigerator Doesn\'t Cool'),
+    ('Incorrect Voltage', 'Refrigerator Fills with Frost'),
+    ('Incorrect Coolant Pressure', 'Refrigerator Fills with Frost'),
+    ('Compressor Failure', 'Refrigerator Fills with Frost'),
+    ('Incorrect Voltage', 'Incorrect Internal Temperature'),
     ('Incorrect Voltage', 'Light Not Turning On'),
     ('Incorrect Voltage', 'Refrigerator Doesn\'t Stop'),
     ('Incorrect Coolant Pressure', 'Incorrect Voltage'),
