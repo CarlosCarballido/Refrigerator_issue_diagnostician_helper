@@ -300,7 +300,6 @@
 
 ## 5. Nodo: `Incorrect Internal Temperature`
 
-
 | Door Doesn't Lock | Dirt | Incorrect Fan Speed | Incorrect Coolant Pressure | Compressor Failure | Incorrect Voltage | Incorrect Internal Temperature = True | Incorrect Internal Temperature = False |
 |-------------------|------|---------------------|----------------------------|--------------------|-------------------|--------------------------------------|---------------------------------------|
 | True | True | True | True | True | True | 0.03 | 0.97 |
@@ -367,7 +366,6 @@
 | False | False | False | False | True | False | 0.45 | 0.55 |
 | False | False | False | False | False | True | 0.5 | 0.5 |
 | False | False | False | False | False | False | 0.1 | 0.9 |
-
 
 ---
 
