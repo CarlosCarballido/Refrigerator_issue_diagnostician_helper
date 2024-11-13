@@ -1,5 +1,4 @@
 # Script para preprocesar los datos
-
 import pandas as pd
 
 def load_data(file_path):
