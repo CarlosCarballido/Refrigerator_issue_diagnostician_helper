@@ -1,1 +1,0 @@
-# Funciones para realizar inferencia bayesiana
