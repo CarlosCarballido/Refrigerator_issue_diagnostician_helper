@@ -91,3 +91,6 @@ class RefrigeratorDiagnosticModel:
             cpd_incorrect_coolant_pressure,
             cpd_compressor_failure
         )
+        
+    def infer_failure_probability(self, variable, evidence):
+        return self.inference.query(variables=[variable], evidence=evidence)
