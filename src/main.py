@@ -41,6 +41,7 @@ if __name__ == "__main__":
     ve = VariableElimination(diagnostic_model)
 
     print("Inference Result:")
+    # TOOD: Implementar la inferencia con VariableElimination para cada nodo del modelo, hacer una pregunta al usuario y luego inferir el nodo
     # Query a variable that is NOT in evidence
     # Here, we use 'Refrigerator Doesn't Cool' as an example query variable
     query_variable = "Refrigerator Doesn't Cool"
