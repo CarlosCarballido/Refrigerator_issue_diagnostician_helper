@@ -21,7 +21,7 @@ model = BayesianNetwork([
 cpd_refrigerator_doesnt_cool = TabularCPD(
     variable='Refrigerator Doesn\'t Cool', variable_card=2,
     values=[
-        [0.53, 0.47],  # Probabilidades cuando 'Incorrect Internal Temperature' está en los estados 0 y 1
+        [0.53, 0.47],
         [0.47, 0.53]
     ],
     evidence=['Incorrect Internal Temperature'],
@@ -31,7 +31,7 @@ cpd_refrigerator_doesnt_cool = TabularCPD(
 cpd_refrigerator_fills_with_frost = TabularCPD(
     variable='Refrigerator Fills with Frost', variable_card=2,
     values=[
-        [0.91, 0.09],  # Probabilidades para el estado 0 y 1 de 'Incorrect Internal Temperature'
+        [0.91, 0.09],
         [0.09, 0.91]
     ],
     evidence=['Incorrect Internal Temperature'],
@@ -41,7 +41,7 @@ cpd_refrigerator_fills_with_frost = TabularCPD(
 cpd_light_not_turning_on = TabularCPD(
     variable='Light Not Turning On', variable_card=2,
     values=[
-        [0.7, 0.4],  # Probabilidades para el estado 0 y 1 de 'Incorrect Voltage'
+        [0.7, 0.4],
         [0.3, 0.6]
     ],
     evidence=['Incorrect Voltage'],
@@ -51,7 +51,7 @@ cpd_light_not_turning_on = TabularCPD(
 cpd_refrigerator_doesnt_stop = TabularCPD(
     variable='Refrigerator Doesn\'t Stop', variable_card=2,
     values=[
-        [0.75, 0.6, 0.2, 0.1],  # Probabilidades para las combinaciones de estados de los dos padres
+        [0.75, 0.6, 0.2, 0.1],
         [0.25, 0.4, 0.8, 0.9]
     ],
     evidence=['Incorrect Voltage', 'Compressor Failure'],
@@ -81,7 +81,6 @@ cpd_incorrect_voltage = TabularCPD(
     evidence_card=[2]
 )
 
-# Nodo: Door Doesn't Lock
 cpd_door_doesnt_lock = TabularCPD(
     variable='Door Doesn\'t Lock', variable_card=2,
     values=[
@@ -90,7 +89,6 @@ cpd_door_doesnt_lock = TabularCPD(
     ]
 )
 
-# Nodo: Dirt
 cpd_dirt = TabularCPD(
     variable='Dirt', variable_card=2,
     values=[
@@ -99,7 +97,6 @@ cpd_dirt = TabularCPD(
     ]
 )
 
-# Nodo: Incorrect Fan Speed
 cpd_incorrect_fan_speed = TabularCPD(
     variable='Incorrect Fan Speed', variable_card=2,
     values=[
@@ -108,7 +105,6 @@ cpd_incorrect_fan_speed = TabularCPD(
     ]
 )
 
-# Nodo: Incorrect Coolant Pressure
 cpd_incorrect_coolant_pressure = TabularCPD(
     variable='Incorrect Coolant Pressure', variable_card=2,
     values=[
@@ -117,7 +113,6 @@ cpd_incorrect_coolant_pressure = TabularCPD(
     ]
 )
 
-# Nodo: Compressor Failure
 cpd_compressor_failure = TabularCPD(
     variable='Compressor Failure', variable_card=2,
     values=[
@@ -126,7 +121,6 @@ cpd_compressor_failure = TabularCPD(
     ]
 )
 
-# Add CPSs to the model
 model.add_cpds(
     cpd_refrigerator_doesnt_cool,
     cpd_refrigerator_fills_with_frost,
