@@ -91,15 +91,3 @@ class RefrigeratorDiagnosticModel:
             cpd_incorrect_coolant_pressure,
             cpd_compressor_failure
         )
-
-    def infer_failure_probability(self, target, evidence):
-        result = self.inference.query(variables=[target], evidence=evidence)
-        return result
-
-if __name__ == "__main__":
-    diagnostic_model = RefrigeratorDiagnosticModel()
-    print("Model initialized and validated.")
-    
-    print("Inference Result:")
-    result = diagnostic_model.infer_failure_probability('Refrigerator Doesn\'t Cool', {'Incorrect Internal Temperature': 1})
-    print(result)
