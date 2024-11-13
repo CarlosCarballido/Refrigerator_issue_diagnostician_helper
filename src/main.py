@@ -10,6 +10,7 @@ from models.bayesian_network_model import RefrigeratorDiagnosticModel
 from variable_elimination import VariableElimination
 
 def interview_user():
+    #TODO: Implementar la entrevista al usuario personalizada dependiendo del nodo que se quiera inferir se hacen diferentes preguntas, no se hacen todas las preguntas para cualquier nodo
     print("Welcome to the Refrigerator Fault Diagnosis Helper.")
     print("Please answer the following questions to help us identify the problem.")
 
