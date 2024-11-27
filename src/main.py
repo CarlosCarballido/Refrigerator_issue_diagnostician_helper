@@ -1,6 +1,5 @@
 import os
 import sys
-import random
 
 # Set up the project root path
 current_dir = os.path.dirname(os.path.abspath(__file__))
