@@ -21,14 +21,8 @@ def interview_user():
         "Incorrect Internal Temperature": "Is the internal temperature of the refrigerator incorrect?",
         "Refrigerator Doesn't Cool": "Is the refrigerator not cooling?",
         "Refrigerator Fills with Frost": "Is there frost buildup in the refrigerator?",
-        "Incorrect Voltage": "Is there an incorrect voltage supply?",
         "Light Not Turning On": "Is the light inside the refrigerator not turning on?",
         "Refrigerator Doesn't Stop": "Does the refrigerator keep running and not stop?",
-        "Door Doesn't Lock": "Does the refrigerator door fail to lock properly?",
-        "Dirt": "Is there dirt or dust buildup affecting the refrigerator's performance?",
-        "Incorrect Fan Speed": "Is the fan speed incorrect?",
-        "Incorrect Coolant Pressure": "Is there incorrect coolant pressure?",
-        "Compressor Failure": "Is the compressor experiencing any failure?"
     }
 
     evidence = {}
@@ -56,12 +50,47 @@ def simulate_refrigerator_failure():
     for key, value in evidence.items():
         print(f"{key}: {'Yes' if value == 1 else 'No'}")
 
-    # Realizar inferencias sobre todos los nodos del modelo
-    print("\nInference Results:")
-    for query_variable in diagnostic_model.model.nodes():  # Acceder al modelo interno
-        if query_variable not in evidence or evidence[query_variable] == 0:
-            result = ve.query([query_variable], evidence=evidence)
-            print(f"{query_variable}: {result}")
+    nodes = list(diagnostic_model.model.nodes())
+
+    # Probar consulta mínima
+    test_evidence = {"Incorrect Internal Temperature": 1}
+    test_variable = "Refrigerator Doesn't Cool"
+    try:
+        result = ve.query(test_variable, evidence=test_evidence)
+    except Exception as e:
+        print(f"Error in test query for {test_variable}: {e}")
+
+    failure_probabilities = []  # Lista para almacenar probabilidades de fallo
+
+    # Lista de estados finales a excluir
+    excluded_states = [
+        "Refrigerator Doesn't Stop",
+        "Light Not Turning On",
+        "Refrigerator Doesn't Cool",
+        "Refrigerator Fills with Frost",
+        "Incorrect Internal Temperature"
+    ]
+
+    for query_variable in nodes:
+        if query_variable in excluded_states:  # Saltar los estados finales
+            continue
+
+        test_evidence = {k: v for k, v in evidence.items() if k != query_variable}  # Eliminar el nodo objetivo de la evidencia
+        try:
+            result = ve.query(query_variable, evidence=test_evidence)
+
+            # Obtener la probabilidad de fallo (estado = 1)
+            failure_probability = result.values[1] * 100  # Convertir a porcentaje
+            failure_probabilities.append((query_variable, failure_probability))
+        except Exception as e:
+            print(f"Error querying {query_variable} with minimal evidence: {e}")
+
+    # Ordenar la lista por probabilidad de fallo en orden descendente
+    failure_probabilities.sort(key=lambda x: x[1], reverse=True)
+
+    print("\nComponents sorted by probability of failure:")
+    for component, probability in failure_probabilities:
+        print(f"{component}: {probability:.2f}%")
 
 if __name__ == "__main__":
     simulate_refrigerator_failure()
