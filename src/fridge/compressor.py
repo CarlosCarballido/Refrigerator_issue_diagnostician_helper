@@ -1,8 +1,30 @@
 class Compressor:
+    def __init__(self):
+        self.noise_level = 0  # Nivel de ruido del compresor
+        self.pressure = 0     # Presión actual del compresor
+
     def check_noise(self) -> bool:
-        # Implementación para verificar el ruido del compresor
-        pass
+        """
+        Verifica si el nivel de ruido del compresor está dentro del rango aceptable.
+        """
+        acceptable_noise_level = 50  # Nivel de ruido máximo aceptable en decibelios
+        return self.noise_level <= acceptable_noise_level
 
     def check_pressure(self) -> bool:
-        # Implementación para verificar la presión del compresor
-        pass
+        """
+        Verifica si la presión del compresor está en un rango óptimo.
+        """
+        optimal_pressure_range = (20, 50)  # Rango de presión óptima (en PSI)
+        return optimal_pressure_range[0] <= self.pressure <= optimal_pressure_range[1]
+
+    def set_noise_level(self, noise: int):
+        """
+        Establece el nivel de ruido del compresor.
+        """
+        self.noise_level = noise
+
+    def set_pressure(self, pressure: int):
+        """
+        Establece la presión del compresor.
+        """
+        self.pressure = pressure
