@@ -1,5 +1,6 @@
 import os
 import sys
+import random
 
 # Set up the project root path
 current_dir = os.path.dirname(os.path.abspath(__file__))
@@ -10,9 +11,11 @@ from models.bayesian_network_model import RefrigeratorDiagnosticModel
 from variable_elimination import VariableElimination
 
 def interview_user():
-    #TODO: Implementar la entrevista al usuario personalizada dependiendo del nodo que se quiera inferir se hacen diferentes preguntas, no se hacen todas las preguntas para cualquier nodo
-    print("Welcome to the Refrigerator Fault Diagnosis Helper.")
-    print("Please answer the following questions to help us identify the problem.")
+    """
+    Realiza una entrevista al usuario para determinar el fallo en la nevera.
+    """
+    print("\nWelcome to the Refrigerator Fault Diagnosis Helper.")
+    print("Please answer the following questions to help identify the issue.")
 
     questions = {
         "Incorrect Internal Temperature": "Is the internal temperature of the refrigerator incorrect?",
@@ -28,26 +31,37 @@ def interview_user():
         "Compressor Failure": "Is the compressor experiencing any failure?"
     }
 
-    responses = {}
+    evidence = {}
     for variable, question in questions.items():
         response = input(question + " (y/n): ").strip().lower()
-        responses[variable] = 1 if response == "y" else 0
+        evidence[variable] = 1 if response == "y" else 0
 
-    return responses
+    return evidence
 
-if __name__ == "__main__":
-    user_responses = interview_user()
+def simulate_refrigerator_failure():
+    """
+    Simula una nevera con un componente que falla y utiliza la red bayesiana
+    para calcular las probabilidades de error.
+    """
+    print("Simulating Refrigerator Fault...")
+
+    # Crear modelo de diagnóstico
     diagnostic_model = RefrigeratorDiagnosticModel()
     ve = VariableElimination(diagnostic_model)
 
-    print("Inference Result:")
-    # TODO: Implementar la inferencia con VariableElimination para cada nodo del modelo, hacer una pregunta al usuario y luego inferir el nodo
-    # Query a variable that is NOT in evidence
-    # Here, we use 'Refrigerator Doesn't Cool' as an example query variable
-    query_variable = "Refrigerator Doesn't Cool"
-    evidence = {key: value for key, value in user_responses.items() if key != query_variable}
-    
-    result = ve.query(query_variable, evidence)
-    print(result)
+    # Realizar entrevista al usuario para determinar evidencia
+    evidence = interview_user()
 
-    print("Thank you for using the Refrigerator Fault Diagnosis Helper.")
+    print("\nEvidence provided to the model:")
+    for key, value in evidence.items():
+        print(f"{key}: {'Yes' if value == 1 else 'No'}")
+
+    # Realizar inferencias sobre todos los nodos del modelo
+    print("\nInference Results:")
+    for query_variable in diagnostic_model.model.nodes():  # Acceder al modelo interno
+        if query_variable not in evidence or evidence[query_variable] == 0:
+            result = ve.query([query_variable], evidence=evidence)
+            print(f"{query_variable}: {result}")
+
+if __name__ == "__main__":
+    simulate_refrigerator_failure()
