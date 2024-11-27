@@ -25,3 +25,11 @@ def diagnose_issue(symptom, df):
     # Filtrar los errores que coincidan con el síntoma dado
     matches = df[df['Symptoms'].str.contains(symptom, case=False)]
     return matches[['Error Code', 'Error Description', 'Possible Causes', 'Solutions']]
+
+# Imprimir información del modelo
+def print_model_info(model):
+    print("\nModel structure:")
+    print(model.edges())
+    print("\nConditional Probability Distributions (CPDs):")
+    for cpd in model.get_cpds():
+        print(cpd)
