@@ -10,44 +10,86 @@ from models.bayesian_network_model import RefrigeratorDiagnosticModel
 from variable_elimination import VariableElimination
 
 def interview_user():
-    #TODO: Implementar la entrevista al usuario personalizada dependiendo del nodo que se quiera inferir se hacen diferentes preguntas, no se hacen todas las preguntas para cualquier nodo
-    print("Welcome to the Refrigerator Fault Diagnosis Helper.")
-    print("Please answer the following questions to help us identify the problem.")
+    """
+    Realiza una entrevista al usuario para determinar el fallo en la nevera.
+    """
+    print("\nWelcome to the Refrigerator Fault Diagnosis Helper.")
+    print("Please answer the following questions to help identify the issue.")
 
     questions = {
         "Incorrect Internal Temperature": "Is the internal temperature of the refrigerator incorrect?",
         "Refrigerator Doesn't Cool": "Is the refrigerator not cooling?",
         "Refrigerator Fills with Frost": "Is there frost buildup in the refrigerator?",
-        "Incorrect Voltage": "Is there an incorrect voltage supply?",
         "Light Not Turning On": "Is the light inside the refrigerator not turning on?",
         "Refrigerator Doesn't Stop": "Does the refrigerator keep running and not stop?",
-        "Door Doesn't Lock": "Does the refrigerator door fail to lock properly?",
-        "Dirt": "Is there dirt or dust buildup affecting the refrigerator's performance?",
-        "Incorrect Fan Speed": "Is the fan speed incorrect?",
-        "Incorrect Coolant Pressure": "Is there incorrect coolant pressure?",
-        "Compressor Failure": "Is the compressor experiencing any failure?"
     }
 
-    responses = {}
+    evidence = {}
     for variable, question in questions.items():
         response = input(question + " (y/n): ").strip().lower()
-        responses[variable] = 1 if response == "y" else 0
+        evidence[variable] = 1 if response == "y" else 0
 
-    return responses
+    return evidence
 
-if __name__ == "__main__":
-    user_responses = interview_user()
+def simulate_refrigerator_failure():
+    """
+    Simula una nevera con un componente que falla y utiliza la red bayesiana
+    para calcular las probabilidades de error.
+    """
+    print("Simulating Refrigerator Fault...")
+
+    # Crear modelo de diagnóstico
     diagnostic_model = RefrigeratorDiagnosticModel()
     ve = VariableElimination(diagnostic_model)
 
-    print("Inference Result:")
-    # TODO: Implementar la inferencia con VariableElimination para cada nodo del modelo, hacer una pregunta al usuario y luego inferir el nodo
-    # Query a variable that is NOT in evidence
-    # Here, we use 'Refrigerator Doesn't Cool' as an example query variable
-    query_variable = "Refrigerator Doesn't Cool"
-    evidence = {key: value for key, value in user_responses.items() if key != query_variable}
-    
-    result = ve.query(query_variable, evidence)
-    print(result)
+    # Realizar entrevista al usuario para determinar evidencia
+    evidence = interview_user()
 
-    print("Thank you for using the Refrigerator Fault Diagnosis Helper.")
+    print("\nEvidence provided to the model:")
+    for key, value in evidence.items():
+        print(f"{key}: {'Yes' if value == 1 else 'No'}")
+
+    nodes = list(diagnostic_model.model.nodes())
+
+    # Probar consulta mínima
+    test_evidence = {"Incorrect Internal Temperature": 1}
+    test_variable = "Refrigerator Doesn't Cool"
+    try:
+        result = ve.query(test_variable, evidence=test_evidence)
+    except Exception as e:
+        print(f"Error in test query for {test_variable}: {e}")
+
+    failure_probabilities = []  # Lista para almacenar probabilidades de fallo
+
+    # Lista de estados finales a excluir
+    excluded_states = [
+        "Refrigerator Doesn't Stop",
+        "Light Not Turning On",
+        "Refrigerator Doesn't Cool",
+        "Refrigerator Fills with Frost",
+        "Incorrect Internal Temperature"
+    ]
+
+    for query_variable in nodes:
+        if query_variable in excluded_states:  # Saltar los estados finales
+            continue
+
+        test_evidence = {k: v for k, v in evidence.items() if k != query_variable}  # Eliminar el nodo objetivo de la evidencia
+        try:
+            result = ve.query(query_variable, evidence=test_evidence)
+
+            # Obtener la probabilidad de fallo (estado = 1)
+            failure_probability = result.values[1] * 100  # Convertir a porcentaje
+            failure_probabilities.append((query_variable, failure_probability))
+        except Exception as e:
+            print(f"Error querying {query_variable} with minimal evidence: {e}")
+
+    # Ordenar la lista por probabilidad de fallo en orden descendente
+    failure_probabilities.sort(key=lambda x: x[1], reverse=True)
+
+    print("\nComponents sorted by probability of failure:")
+    for component, probability in failure_probabilities:
+        print(f"{component}: {probability:.2f}%")
+
+if __name__ == "__main__":
+    simulate_refrigerator_failure()

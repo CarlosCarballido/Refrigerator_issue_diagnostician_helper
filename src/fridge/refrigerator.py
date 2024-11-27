@@ -17,33 +17,22 @@ class Refrigerator:
         self.fan = Fan()
 
     def is_door_closed(self) -> bool:
-        # Implementación para verificar si la puerta está cerrada
-        pass
+        return self.door.check_seals()
 
     def is_compressor_working(self) -> bool:
-        # Implementación para verificar si el compresor funciona
-        pass
+        return self.compressor.check_noise() and self.compressor.check_pressure()
 
     def is_temperature_adequate(self) -> bool:
-        # Implementación para verificar si la temperatura es adecuada
-        pass
+        return self.cooling_system.check_temperature()
 
     def is_voltage_adequate(self) -> bool:
-        # Implementación para verificar si el voltaje es adecuado
-        pass
+        return self.electrical_system.check_supply()
 
     def is_clean(self) -> bool:
-        # Implementación para verificar si el sistema está limpio
-        pass
-
-    def is_sensor_working(self) -> bool:
-        # Implementación para verificar si el sensor funciona
-        pass
+        return not self.dirt.check_dirt()
 
     def is_refrigerant_pressure_adequate(self) -> bool:
-        # Implementación para verificar si la presión del refrigerante es adecuada
-        pass
+        return self.refrigerant.check_pressure()
 
     def is_fan_speed_adequate(self) -> bool:
-        # Implementación para verificar si la velocidad del ventilador es adecuada
-        pass
+        return self.fan.check_speed()
