@@ -37,33 +37,48 @@ def display_image(component_name):
     Muestra la imagen del componente fallado.
     """
     # Normalizar el nombre del componente
-    normalized_name = component_name.replace(" Failure", "").strip()
+    normalized_name = component_name.lower()
+    normalized_name = (
+        normalized_name.replace("failure", "")
+        .replace("incorrect", "")
+        .replace("speed", "")
+        .replace("pressure", "")
+        .replace("doesn't lock", "")
+        .strip()
+    )
 
     image_dir = os.path.join(project_root, 'data', 'Fridge-Images')
     image_mapping = {
-        "Compressor": "compressor.webp",
-        "Cooling System": "cooling-system.webp",
-        "Door": "door_open.webp",
-        "Electrical System": "electrical-system.webp",
-        "Fan": "fridge-fan.webp",
-        "Refrigerant": "refrigerant.webp",
-        "Refrigerator": "refrigerator.webp",
+        "compressor": "compressor.webp",
+        "cooling system": "coolant-system.webp",
+        "door": "door_open.webp",
+        "electrical system": "electrical-system.webp",
+        "fan": "fridge-fan.webp",
+        "refrigerant": "refrigerant.webp",
+        "refrigerator": "refrigerator.webp",
+        "coolant": "coolant-system.webp",
+        "voltage": "voltage.webp",
+        "internal temperature": "temperature.webp",
+        "light": "light.webp",
+        "dirt": "dirt.webp",
+        "fan speed": "fan-speed.webp",
     }
 
+    # Verifica si el nombre normalizado está en el diccionario
     image_file = image_mapping.get(normalized_name)
     if image_file:
         image_path = os.path.join(image_dir, image_file)
         if os.path.exists(image_path):
-            print(f"Displaying image for {normalized_name}: {image_file}")
+            print(f"Displaying image for {normalized_name.capitalize()}: {image_file}")
             try:
                 img = Image.open(image_path)
                 img.show()
             except Exception as e:
                 print(f"Error displaying image: {e}")
         else:
-            print(f"Image not found for {normalized_name}: {image_file}")
+            print(f"Image file not found at path: {image_path}")
     else:
-        print(f"No image mapping found for {normalized_name}")
+        print(f"No image mapping found for '{normalized_name}'. Add it to the mapping.")
 
 def simulate_refrigerator_failure():
     """
