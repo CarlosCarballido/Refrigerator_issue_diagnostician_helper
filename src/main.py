@@ -1,5 +1,6 @@
 import os
 import sys
+from PIL import Image
 
 # Set up the project root path
 current_dir = os.path.dirname(os.path.abspath(__file__))
@@ -31,6 +32,39 @@ def interview_user():
 
     return evidence
 
+def display_image(component_name):
+    """
+    Muestra la imagen del componente fallado.
+    """
+    # Normalizar el nombre del componente
+    normalized_name = component_name.replace(" Failure", "").strip()
+
+    image_dir = os.path.join(project_root, 'data', 'Fridge-Images')
+    image_mapping = {
+        "Compressor": "compressor.webp",
+        "Cooling System": "cooling-system.webp",
+        "Door": "door_open.webp",
+        "Electrical System": "electrical-system.webp",
+        "Fan": "fridge-fan.webp",
+        "Refrigerant": "refrigerant.webp",
+        "Refrigerator": "refrigerator.webp",
+    }
+
+    image_file = image_mapping.get(normalized_name)
+    if image_file:
+        image_path = os.path.join(image_dir, image_file)
+        if os.path.exists(image_path):
+            print(f"Displaying image for {normalized_name}: {image_file}")
+            try:
+                img = Image.open(image_path)
+                img.show()
+            except Exception as e:
+                print(f"Error displaying image: {e}")
+        else:
+            print(f"Image not found for {normalized_name}: {image_file}")
+    else:
+        print(f"No image mapping found for {normalized_name}")
+
 def simulate_refrigerator_failure():
     """
     Simula una nevera con un componente que falla y utiliza la red bayesiana
@@ -50,14 +84,6 @@ def simulate_refrigerator_failure():
         print(f"{key}: {'Yes' if value == 1 else 'No'}")
 
     nodes = list(diagnostic_model.model.nodes())
-
-    # Probar consulta mínima
-    test_evidence = {"Incorrect Internal Temperature": 1}
-    test_variable = "Refrigerator Doesn't Cool"
-    try:
-        result = ve.query(test_variable, evidence=test_evidence)
-    except Exception as e:
-        print(f"Error in test query for {test_variable}: {e}")
 
     failure_probabilities = []  # Lista para almacenar probabilidades de fallo
 
@@ -90,6 +116,12 @@ def simulate_refrigerator_failure():
     print("\nComponents sorted by probability of failure:")
     for component, probability in failure_probabilities:
         print(f"{component}: {probability:.2f}%")
+
+    # Mostrar la imagen del componente más probable
+    if failure_probabilities:
+        most_probable_failure = failure_probabilities[0]
+        print(f"\nThe most probable failing component is: {most_probable_failure[0]} ({most_probable_failure[1]:.2f}%)")
+        display_image(most_probable_failure[0])
 
 if __name__ == "__main__":
     simulate_refrigerator_failure()
