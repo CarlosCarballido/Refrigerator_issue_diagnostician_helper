@@ -8,6 +8,8 @@ project_root = os.path.abspath(os.path.join(current_dir, '..'))
 sys.path.append(project_root)
 
 from fridge.refrigerator import Refrigerator
+from models.bayesian_network_model import RefrigeratorDiagnosticModel
+from variable_elimination import VariableElimination
 
 def introduce_random_failure(refrigerator):
     """
@@ -33,7 +35,7 @@ def introduce_random_failure(refrigerator):
     elif failed_component == "fan":
         refrigerator.fan.set_speed(500)  # Velocidad del ventilador fuera del rango óptimo
 
-    print(f"A failure has been introduced in the {failed_component}.")
+    print(f"[ SIMULATION ] A failure has been introduced in the {failed_component}.")
 
 
 def interview_user():
@@ -44,24 +46,41 @@ def interview_user():
     print("Please answer the following questions to help identify the issue.")
 
     questions = {
-        "Is the door closed properly?": lambda fridge: fridge.is_door_closed(),
-        "Is the compressor making unusual noise?": lambda fridge: not fridge.is_compressor_working(),
-        "Is the internal temperature correct?": lambda fridge: fridge.is_temperature_adequate(),
-        "Is the voltage supply normal?": lambda fridge: fridge.is_voltage_adequate(),
-        "Is the refrigerator clean (no dirt buildup)?": lambda fridge: fridge.is_clean(),
-        "Is the refrigerant pressure adequate?": lambda fridge: fridge.is_refrigerant_pressure_adequate(),
-        "Is the fan running at an appropriate speed?": lambda fridge: fridge.is_fan_speed_adequate(),
+        "Incorrect Internal Temperature": "Is the internal temperature of the refrigerator incorrect?",
+        "Refrigerator Doesn't Cool": "Is the refrigerator not cooling?",
+        "Refrigerator Fills with Frost": "Is there frost buildup in the refrigerator?",
+        "Light Not Turning On": "Is the light inside the refrigerator not turning on?",
+        "Refrigerator Doesn't Stop": "Does the refrigerator keep running and not stop?",
     }
 
-    for question, check_function in questions.items():
-        response = input(f"{question} (y/n): ").strip().lower()
-        if response == "n":
-            print("This might be where the issue lies. Investigating further...")
-            return check_function
+    evidence = {}
+    for variable, question in questions.items():
+        response = input(question + " (y/n): ").strip().lower()
+        evidence[variable] = 1 if response == "y" else 0
 
-    print("No issues reported based on user input. Consider performing a deeper diagnostic.")
-    return None
+    return evidence
 
+def calculate_failure_probabilities(model, evidence):
+    """
+    Utiliza un modelo probabilístico para calcular las probabilidades de fallo de cada componente.
+    """
+    ve = VariableElimination(model)
+    nodes = list(model.model.nodes())
+
+    failure_probabilities = []
+
+    for query_variable in nodes:
+        if query_variable in evidence:
+            continue  # No calcular para variables ya en evidencia
+
+        try:
+            result = ve.query(query_variable, evidence=evidence)
+            failure_probability = result.values[1] * 100  # Probabilidad de fallo en porcentaje
+            failure_probabilities.append((query_variable, failure_probability))
+        except Exception as e:
+            print(f"Error querying {query_variable}: {e}")
+
+    return sorted(failure_probabilities, key=lambda x: x[1], reverse=True)
 
 def simulate_refrigerator_failure():
     """
@@ -72,15 +91,27 @@ def simulate_refrigerator_failure():
     # Introduce un fallo aleatorio
     introduce_random_failure(fridge)
 
+    # Crear modelo de diagnóstico
+    diagnostic_model = RefrigeratorDiagnosticModel()
+
     # Realiza la entrevista
     print("\n--- Starting Diagnostic ---")
-    check_function = interview_user()
+    evidence = interview_user()
 
-    if check_function and not check_function(fridge):
-        print("Confirmed: The component identified by the user has a failure.")
-    else:
-        print("Unable to confirm the failure based on user input. Further diagnostics needed.")
+    print("\nEvidence provided to the model:")
+    for key, value in evidence.items():
+        print(f"{key}: {'Yes' if value == 1 else 'No'}")
 
+    # Agregar condición para "dirt" si hay altos niveles de suciedad
+    if fridge.dirt.get_dirt_level() > 50:
+        evidence["High Dirt Level"] = 1
+
+    # Calcular probabilidades de fallo
+    failure_probabilities = calculate_failure_probabilities(diagnostic_model, evidence)
+
+    print("\nComponents sorted by probability of failure:")
+    for component, probability in failure_probabilities:
+        print(f"{component}: {probability:.2f}%")
 
 if __name__ == "__main__":
     simulate_refrigerator_failure()
