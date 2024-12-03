@@ -19,7 +19,6 @@ def display_image_gui(image_path):
     """
     img_window = tk.Toplevel()
     img_window.title("Component Failure")
-    img_window.geometry("600x600")
     img = PhotoImage(file=image_path)
     img_label = tk.Label(img_window, image=img)
     img_label.image = img  # Keep a reference to prevent garbage collection
@@ -93,18 +92,18 @@ def simulate_failure_gui():
 
         image_dir = os.path.join(project_root, 'data', 'Fridge-Images')
         image_mapping = {
-            "compressor": "compressor.webp",
-            "cooling system": "coolant-system.webp",
-            "door": "door_open.webp",
-            "electrical system": "electrical-system.webp",
-            "fan": "fridge-fan.webp",
-            "refrigerant": "refrigerant.webp",
-            "refrigerator": "refrigerator.webp",
-            "coolant": "coolant-system.webp",
-            "voltage": "voltage.webp",
-            "internal temperature": "temperature.webp",
-            "dirt": "dirt.webp",
-            "fan speed": "fan-speed.webp",
+            "compressor": "compressor.png",
+            "cooling system": "coolant-system.png",
+            "door": "door_open.png",
+            "electrical system": "electrical-system.png",
+            "fan": "fridge-fan.png",
+            "refrigerant": "refrigerant.png",
+            "refrigerator": "refrigerator.png",
+            "coolant": "coolant-system.png",
+            "voltage": "voltage.png",
+            "internal temperature": "temperature.png",
+            "dirt": "dirt.png",
+            "fan speed": "fan-speed.png",
         }
 
         image_file = image_mapping.get(normalized_name)
