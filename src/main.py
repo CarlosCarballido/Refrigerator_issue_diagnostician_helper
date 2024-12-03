@@ -1,6 +1,7 @@
 import os
 import sys
 from PIL import Image
+from time import sleep
 
 # Set up the project root path
 current_dir = os.path.dirname(os.path.abspath(__file__))
@@ -59,7 +60,6 @@ def display_image(component_name):
         "coolant": "coolant-system.webp",
         "voltage": "voltage.webp",
         "internal temperature": "temperature.webp",
-        "light": "light.webp",
         "dirt": "dirt.webp",
         "fan speed": "fan-speed.webp",
     }
@@ -69,7 +69,7 @@ def display_image(component_name):
     if image_file:
         image_path = os.path.join(image_dir, image_file)
         if os.path.exists(image_path):
-            print(f"Displaying image for {normalized_name.capitalize()}: {image_file}")
+            print(f"Displaying image for {normalized_name.capitalize()}")
             try:
                 img = Image.open(image_path)
                 img.show()
@@ -78,13 +78,9 @@ def display_image(component_name):
         else:
             print(f"Image file not found at path: {image_path}")
     else:
-        print(f"No image mapping found for '{normalized_name}'. Add it to the mapping.")
+        print(f"No image mapping found for '{normalized_name}'.")
 
 def simulate_refrigerator_failure():
-    """
-    Simula una nevera con un componente que falla y utiliza la red bayesiana
-    para calcular las probabilidades de error.
-    """
     print("Simulating Refrigerator Fault...")
 
     # Crear modelo de diagnóstico
@@ -135,7 +131,10 @@ def simulate_refrigerator_failure():
     # Mostrar la imagen del componente más probable
     if failure_probabilities:
         most_probable_failure = failure_probabilities[0]
-        print(f"\nThe most probable failing component is: {most_probable_failure[0]} ({most_probable_failure[1]:.2f}%)")
+        print(f"\nThe most probable failure is: {most_probable_failure[0]} ({most_probable_failure[1]:.2f}%)")
+        sleep(1)
+        print("Displaying image of the most probable failure...")
+        sleep(3)
         display_image(most_probable_failure[0])
 
 if __name__ == "__main__":
