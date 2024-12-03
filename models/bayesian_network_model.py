@@ -74,7 +74,7 @@ class RefrigeratorDiagnosticModel:
 
         cpd_door_doesnt_lock = TabularCPD(variable='Door Doesn\'t Lock', variable_card=2, values=[[0.3], [0.7]])
         cpd_dirt = TabularCPD(variable='Dirt', variable_card=2, values=[[0.4], [0.6]])
-        cpd_incorrect_fan_speed = TabularCPD(variable='Incorrect Fan Speed', variable_card=2, values=[[0.25], [0.75]])
+        cpd_incorrect_fan_speed = TabularCPD(variable='Incorrect Fan Speed', variable_card=2, values=[[0.37], [0.63]])
         cpd_incorrect_coolant_pressure = TabularCPD(variable='Incorrect Coolant Pressure', variable_card=2, values=[[0.2], [0.8]])
         cpd_compressor_failure = TabularCPD(variable='Compressor Failure', variable_card=2, values=[[0.25], [0.75]])
 
