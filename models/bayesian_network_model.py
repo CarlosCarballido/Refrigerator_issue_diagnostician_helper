@@ -1,3 +1,4 @@
+from networkx import NetworkXError
 from pgmpy.models import BayesianNetwork
 from pgmpy.factors.discrete import TabularCPD
 from pgmpy.inference import VariableElimination
@@ -93,4 +94,13 @@ class RefrigeratorDiagnosticModel:
         )
         
     def infer_failure_probability(self, variable, evidence):
-        return self.inference.query(variables=[variable], evidence=evidence)
+        try:
+            result = self.inference.query(variables=[variable], evidence=evidence)
+            print(f"Query result for variable '{variable}' with evidence {evidence}: {result.values}")
+            for var in evidence:
+                print(f"Intermediate result for evidence variable '{var}': {self.inference.query(variables=[var], evidence=evidence).values}")
+            return result
+        except NetworkXError as err:
+            raise KeyError(f"The variable {variable} is not in the model.") from err
+        except NetworkXError as err:
+            raise KeyError(f"Variable {variable} does not exist in the model.") from err
