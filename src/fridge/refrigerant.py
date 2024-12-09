@@ -1,13 +1,13 @@
 class Refrigerant:
     def __init__(self):
-        self.pressure = 0  # Presión inicial del refrigerante (en PSI)
-        self.has_leak = False  # Estado inicial de fugas (False: sin fugas)
+        self.pressure = 0
+        self.has_leak = False
 
     def check_pressure(self) -> bool:
         """
         Verifica si la presión del refrigerante está dentro del rango óptimo.
         """
-        optimal_pressure_range = (30, 60)  # Rango óptimo de presión (en PSI)
+        optimal_pressure_range = (30, 60)
         return optimal_pressure_range[0] <= self.pressure <= optimal_pressure_range[1]
 
     def check_leaks(self) -> bool:
