@@ -1,12 +1,12 @@
 class CoolingSystem:
     def __init__(self):
-        self.temperature = 0  # Temperatura actual del sistema de enfriamiento
+        self.temperature = 0
 
     def check_temperature(self) -> bool:
         """
         Verifica si la temperatura del sistema de enfriamiento está dentro del rango óptimo.
         """
-        optimal_temperature_range = (-5, 5)  # Rango de temperatura óptima (en °C)
+        optimal_temperature_range = (-5, 5)
         return optimal_temperature_range[0] <= self.temperature <= optimal_temperature_range[1]
 
     def set_temperature(self, temperature: float):
@@ -29,7 +29,7 @@ class CoolingSystem:
         Incrementa la temperatura gradualmente hacia un valor objetivo.
         """
         while self.temperature < target_temperature:
-            self.temperature += 0.5  # Simulación de incremento gradual
+            self.temperature += 0.5
             print(f"Aumentando temperatura: {self.temperature} °C")
 
     def decrease_temperature(self, target_temperature: float):
@@ -37,5 +37,5 @@ class CoolingSystem:
         Disminuye la temperatura gradualmente hacia un valor objetivo.
         """
         while self.temperature > target_temperature:
-            self.temperature -= 0.5  # Simulación de decremento gradual
+            self.temperature -= 0.5
             print(f"Disminuyendo temperatura: {self.temperature} °C")
