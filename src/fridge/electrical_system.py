@@ -1,13 +1,13 @@
 class ElectricalSystem:
     def __init__(self):
-        self.voltage = 220  # Voltaje inicial del sistema (en voltios)
-        self.status = True  # Estado del suministro eléctrico (True: funcional, False: fallo)
+        self.voltage = 220
+        self.status = True
 
     def check_supply(self) -> bool:
         """
         Verifica si el suministro eléctrico es adecuado.
         """
-        optimal_voltage_range = (200, 240)  # Rango aceptable de voltaje (en voltios)
+        optimal_voltage_range = (200, 240)
         return self.status and optimal_voltage_range[0] <= self.voltage <= optimal_voltage_range[1]
 
     def set_voltage(self, voltage: int):
