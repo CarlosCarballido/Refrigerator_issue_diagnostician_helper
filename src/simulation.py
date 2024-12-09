@@ -23,17 +23,17 @@ def introduce_random_failure(refrigerator):
     if failed_component == "door":
         refrigerator.door.deteriorate_seals(30)
     elif failed_component == "compressor":
-        refrigerator.compressor.set_noise_level(100)  # Nivel de ruido inaceptable
+        refrigerator.compressor.set_noise_level(100)
     elif failed_component == "cooling_system":
-        refrigerator.cooling_system.set_temperature(15)  # Temperatura fuera del rango óptimo
+        refrigerator.cooling_system.set_temperature(15)
     elif failed_component == "electrical_system":
-        refrigerator.electrical_system.set_voltage(150)  # Voltaje fuera del rango aceptable
+        refrigerator.electrical_system.set_voltage(150)
     elif failed_component == "dirt":
-        refrigerator.dirt.accumulate_dirt(80)  # Nivel de suciedad inaceptable
+        refrigerator.dirt.accumulate_dirt(80)
     elif failed_component == "refrigerant":
-        refrigerator.refrigerant.simulate_leak()  # Simula una fuga
+        refrigerator.refrigerant.simulate_leak()
     elif failed_component == "fan":
-        refrigerator.fan.set_speed(500)  # Velocidad del ventilador fuera del rango óptimo
+        refrigerator.fan.set_speed(500)
 
     print(f"[ SIMULATION ] A failure has been introduced in the {failed_component}.")
 
@@ -71,11 +71,11 @@ def calculate_failure_probabilities(model, evidence):
 
     for query_variable in nodes:
         if query_variable in evidence:
-            continue  # No calcular para variables ya en evidencia
+            continue
 
         try:
             result = ve.query(query_variable, evidence=evidence)
-            failure_probability = result.values[1] * 100  # Probabilidad de fallo en porcentaje
+            failure_probability = result.values[1] * 100
             failure_probabilities.append((query_variable, failure_probability))
         except Exception as e:
             print(f"Error querying {query_variable}: {e}")
@@ -88,13 +88,11 @@ def simulate_refrigerator_failure():
     """
     fridge = Refrigerator()
 
-    # Introduce un fallo aleatorio
     introduce_random_failure(fridge)
 
-    # Crear modelo de diagnóstico
     diagnostic_model = RefrigeratorDiagnosticModel()
 
-    # Realiza la entrevista
+
     print("\n--- Starting Diagnostic ---")
     evidence = interview_user()
 
@@ -102,11 +100,9 @@ def simulate_refrigerator_failure():
     for key, value in evidence.items():
         print(f"{key}: {'Yes' if value == 1 else 'No'}")
 
-    # Agregar condición para "dirt" si hay altos niveles de suciedad
     if fridge.dirt.get_dirt_level() > 50:
         evidence["High Dirt Level"] = 1
 
-    # Calcular probabilidades de fallo
     failure_probabilities = calculate_failure_probabilities(diagnostic_model, evidence)
 
     print("\nComponents sorted by probability of failure:")
