@@ -1,13 +1,13 @@
 class Door:
     def __init__(self):
-        self.is_closed = True  # Estado inicial de la puerta (cerrada)
-        self.seal_condition = 100  # Condición del sello (0: malo, 100: perfecto)
+        self.is_closed = True
+        self.seal_condition = 100
 
     def check_seals(self) -> bool:
         """
         Verifica si los sellos de la puerta están en condiciones adecuadas.
         """
-        seal_threshold = 75  # Nivel mínimo aceptable de la condición del sello
+        seal_threshold = 75
         return self.seal_condition >= seal_threshold
 
     def open_door(self):
@@ -34,7 +34,7 @@ class Door:
         """
         Deteriora los sellos de la puerta por una cantidad específica.
         """
-        self.seal_condition = max(0, self.seal_condition - amount)  # Límite mínimo de 0
+        self.seal_condition = max(0, self.seal_condition - amount)
         print(f"Condición del sello: {self.seal_condition}")
 
     def repair_seals(self):
