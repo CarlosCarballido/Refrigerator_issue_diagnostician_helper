@@ -98,7 +98,9 @@ class RefrigeratorDiagnosticModel:
             result = self.inference.query(variables=[variable], evidence=evidence)
             print(f"Query result for variable '{variable}' with evidence {evidence}: {result.values}")
             for var in evidence:
-                print(f"Intermediate result for evidence variable '{var}': {self.inference.query(variables=[var], evidence=evidence).values}")
+                if var != variable:
+                    intermediate_evidence = {k: v for k, v in evidence.items() if k != var}
+                    print(f"Intermediate result for evidence variable '{var}': {self.inference.query(variables=[var], evidence=intermediate_evidence).values}")
             return result
         except NetworkXError as err:
             raise KeyError(f"The variable {variable} is not in the model.") from err
