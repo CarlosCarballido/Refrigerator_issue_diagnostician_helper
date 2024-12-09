@@ -64,7 +64,6 @@ def display_image(component_name):
         "fan speed": "fan-speed.png",
     }
 
-    # Verifica si el nombre normalizado está en el diccionario
     image_file = image_mapping.get(normalized_name)
     if image_file:
         image_path = os.path.join(image_dir, image_file)
@@ -83,11 +82,9 @@ def display_image(component_name):
 def simulate_refrigerator_failure():
     print("Simulating Refrigerator Fault...")
 
-    # Crear modelo de diagnóstico
     diagnostic_model = RefrigeratorDiagnosticModel()
     ve = VariableElimination(diagnostic_model)
 
-    # Realizar entrevista al usuario para determinar evidencia
     evidence = interview_user()
 
     print("\nEvidence provided to the model:")
@@ -96,9 +93,8 @@ def simulate_refrigerator_failure():
 
     nodes = list(diagnostic_model.model.nodes())
 
-    failure_probabilities = []  # Lista para almacenar probabilidades de fallo
+    failure_probabilities = []
 
-    # Lista de estados finales a excluir
     excluded_states = [
         "Refrigerator Doesn't Stop",
         "Light Not Turning On",
@@ -108,27 +104,24 @@ def simulate_refrigerator_failure():
     ]
 
     for query_variable in nodes:
-        if query_variable in excluded_states:  # Saltar los estados finales
+        if query_variable in excluded_states:  
             continue
 
-        test_evidence = {k: v for k, v in evidence.items() if k != query_variable}  # Eliminar el nodo objetivo de la evidencia
+        test_evidence = {k: v for k, v in evidence.items() if k != query_variable}  
         try:
             result = ve.query(query_variable, evidence=test_evidence)
 
-            # Obtener la probabilidad de fallo (estado = 1)
-            failure_probability = result.values[1] * 100  # Convertir a porcentaje
+            failure_probability = result.values[1] * 100
             failure_probabilities.append((query_variable, failure_probability))
         except Exception as e:
             print(f"Error querying {query_variable} with minimal evidence: {e}")
 
-    # Ordenar la lista por probabilidad de fallo en orden descendente
     failure_probabilities.sort(key=lambda x: x[1], reverse=True)
 
     print("\nComponents sorted by probability of failure:")
     for component, probability in failure_probabilities:
         print(f"{component}: {probability:.2f}%")
 
-    # Mostrar la imagen del componente más probable
     if failure_probabilities:
         most_probable_failure = failure_probabilities[0]
         print(f"\nThe most probable failure is: {most_probable_failure[0]} ({most_probable_failure[1]:.2f}%)")
