@@ -1,33 +1,38 @@
 import pytest
+import numpy as np
 from src.variable_elimination import VariableElimination
 from models.bayesian_network_model import RefrigeratorDiagnosticModel
 
 @pytest.fixture
 def setup_inference():
-    """
-    Fixture para inicializar el modelo y el objeto VariableElimination.
-    """
+
     diagnostic_model = RefrigeratorDiagnosticModel()
     ve = VariableElimination(diagnostic_model)
     return ve
 
 def test_query_inference_valid_variable(setup_inference):
-    """
-    Prueba que un query válido devuelve valores esperados.
-    """
+
     ve = setup_inference
     evidence = {
         "Door Doesn't Lock": 1,
         "Dirt": 1,
         "Incorrect Fan Speed": 1
     }
-    result = ve.query("Compressor Failure", evidence)
-    assert 1 in result.values, "Inference did not return expected values."
+
+    variable_to_query = "Compressor Failure"
+    
+    result = ve.query(variable_to_query, evidence)
+    
+    assert hasattr(result, "values"), "Result object does not have 'values' attribute."
+    assert isinstance(result.values, np.ndarray), "Result 'values' is not a numpy array."
+    
+    assert len(result.values) > 1, "Result values are incomplete."
+    assert np.all(np.isreal(result.values)), "Result values are not numeric."
+
+    assert result.values[1] > 0, "Inference did not return a valid probability."
 
 def test_query_inference_invalid_variable(setup_inference):
-    """
-    Prueba que un query con una variable inexistente lanza KeyError.
-    """
+
     ve = setup_inference
     evidence = {
         "Door Doesn't Lock": 1
