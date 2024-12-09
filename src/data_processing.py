@@ -1,4 +1,3 @@
-# Script para preprocesar los datos
 import pandas as pd
 
 def load_data(file_path):
@@ -22,11 +21,9 @@ def diagnose_issue(symptom, df):
     """
     Busca posibles problemas basados en los síntomas observados.
     """
-    # Filtrar los errores que coincidan con el síntoma dado
     matches = df[df['Symptoms'].str.contains(symptom, case=False)]
     return matches[['Error Code', 'Error Description', 'Possible Causes', 'Solutions']]
 
-# Imprimir información del modelo
 def print_model_info(model):
     print("\nModel structure:")
     print(model.edges())
