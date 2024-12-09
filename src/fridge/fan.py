@@ -1,12 +1,12 @@
 class Fan:
     def __init__(self):
-        self.speed = 0  # Velocidad inicial del ventilador (en RPM)
+        self.speed = 0
 
     def check_speed(self) -> bool:
         """
         Verifica si la velocidad del ventilador está dentro del rango óptimo.
         """
-        optimal_speed_range = (1000, 3000)  # Rango de velocidad óptima (en RPM)
+        optimal_speed_range = (1000, 3000)
         return optimal_speed_range[0] <= self.speed <= optimal_speed_range[1]
 
     def set_speed(self, speed: int):
@@ -27,5 +27,5 @@ class Fan:
         """
         Disminuye la velocidad del ventilador.
         """
-        self.speed = max(0, self.speed - decrement)  # La velocidad no puede ser negativa
+        self.speed = max(0, self.speed - decrement)
         print(f"Velocidad del ventilador reducida a {self.speed} RPM")
