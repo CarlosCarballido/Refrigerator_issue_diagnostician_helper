@@ -28,11 +28,9 @@ def simulate_failure_gui():
     """
     Simulate a refrigerator failure and display the most probable issue in a GUI.
     """
-    # Create diagnostic model
     diagnostic_model = RefrigeratorDiagnosticModel()
     ve = VariableElimination(diagnostic_model)
 
-    # Collect user inputs
     evidence = {
         "Incorrect Internal Temperature": var_temp.get(),
         "Refrigerator Doesn't Cool": var_cool.get(),
@@ -43,9 +41,8 @@ def simulate_failure_gui():
 
     nodes = list(diagnostic_model.model.nodes())
 
-    failure_probabilities = []  # List to store failure probabilities
+    failure_probabilities = []
 
-    # List of final states to exclude
     excluded_states = [
         "Refrigerator Doesn't Stop",
         "Light Not Turning On",
@@ -62,8 +59,7 @@ def simulate_failure_gui():
         try:
             result = ve.query(query_variable, evidence=test_evidence)
 
-            # Get the probability of failure (state = 1)
-            failure_probability = result.values[1] * 100  # Convert to percentage
+            failure_probability = result.values[1] * 100
             failure_probabilities.append((query_variable, failure_probability))
         except Exception as e:
             messagebox.showerror("Error", f"Error querying {query_variable}: {e}")
@@ -79,7 +75,6 @@ def simulate_failure_gui():
             f"The most probable failing component is: {component} ({probability:.2f}%)"
         )
 
-        # Display the image of the component
         normalized_name = component.lower()
         normalized_name = (
             normalized_name.replace("failure", "")
@@ -116,28 +111,23 @@ def simulate_failure_gui():
         else:
             messagebox.showerror("Error", f"No image mapping found for {component}")
 
-# Create the main GUI window
 root = tk.Tk()
 root.title("Refrigerator Fault Diagnosis Helper")
 root.geometry("400x300")
 
-# Create input variables
 var_temp = tk.IntVar(value=0)
 var_cool = tk.IntVar(value=0)
 var_frost = tk.IntVar(value=0)
 var_light = tk.IntVar(value=0)
 var_stop = tk.IntVar(value=0)
 
-# Create checkbuttons for evidence collection
 tk.Checkbutton(root, text="Incorrect Internal Temperature", variable=var_temp).pack(anchor="w")
 tk.Checkbutton(root, text="Refrigerator Doesn't Cool", variable=var_cool).pack(anchor="w")
 tk.Checkbutton(root, text="Refrigerator Fills with Frost", variable=var_frost).pack(anchor="w")
 tk.Checkbutton(root, text="Light Not Turning On", variable=var_light).pack(anchor="w")
 tk.Checkbutton(root, text="Refrigerator Doesn't Stop", variable=var_stop).pack(anchor="w")
 
-# Create a button to simulate the failure
 simulate_button = tk.Button(root, text="Diagnose", command=simulate_failure_gui)
 simulate_button.pack(pady=20)
 
-# Run the main loop
 root.mainloop()
